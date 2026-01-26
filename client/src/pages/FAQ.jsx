@@ -96,7 +96,7 @@ const FAQ = () => {
           <span className="mb-4 inline-block rounded-full bg-indigo-500/10 px-4 py-1.5 text-sm font-semibold text-indigo-400 ring-1 ring-inset ring-indigo-500/20">
             Support & Details
           </span>
-          <h2 className="bg-gradient-to-r from-white via-indigo-100 to-indigo-200 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-6xl">
+          <h2 className="bg-gradient-to-r from-white via-indigo-100 to-indigo-200 bg-clip-text text-4xl font-extrabold tracking-tight sm:text-6xl">
             Frequently Asked Questions
           </h2>
           <p className="mt-6 text-lg leading-8 text-slate-400 max-w-2xl mx-auto">
