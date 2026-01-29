@@ -12,7 +12,7 @@ const Home = () => {
   };
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-slate-950 text-center selection:bg-indigo-500/30">
+    <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-slate-50 text-center selection:bg-indigo-500/30">
 
 
       
