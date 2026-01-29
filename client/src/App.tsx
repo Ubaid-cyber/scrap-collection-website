@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home.jsx';
 import FAQ  from './pages/FAQ.jsx';
+import Contact from "./pages/Contact.jsx";
+import Pricing from "./pages/Pricing.jsx";
 
 function App() {
   return (
@@ -18,12 +20,18 @@ function App() {
               <span className="text-indigo-500">.</span>
             </Link>
 
-            <div className="flex gap-8 text-sm font-medium">
+            <div className="flex gap-10 text-sm font-medium">
               <Link to="/" className="text-slate-400 hover:text-white transition-colors duration-200">
                 Home
               </Link>
               <Link to="/faq" className="text-slate-400 hover:text-white transition-colors duration-200">
                 FAQ
+              </Link>
+              <Link to="/pricing" className="text-slate-400 hover:text-white transition-colors duration-200">
+                Pricing
+              </Link>
+              <Link to="/contact" className="text-slate-400 hover:text-white transition-colors duration-200">
+                Contact
               </Link>
             </div>
           </div>
@@ -34,6 +42,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/pricing" element={<Pricing />} />
           </Routes>
         </main>
         

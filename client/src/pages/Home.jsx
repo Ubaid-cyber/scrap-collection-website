@@ -87,7 +87,7 @@ const Home = () => {
           </Link>
           
           <button className="px-8 py-4 rounded-full font-semibold text-slate-300 hover:text-white transition-colors border border-transparent hover:border-white/10 hover:bg-white/5">
-            Documentation
+            Another Random Button
           </button>
         </div>
       </div>
