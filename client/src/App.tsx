@@ -5,7 +5,11 @@ import {
   Route, 
   Link
 } from 'react-router-dom';
-import Contact from "./pages/Contact.jsx"
+import Contact from "./pages/Contact.jsx";
+import Login from "./pages/Login.jsx";
+import Services from "./pages/Services.jsx";
+import DirectorImage from "./assets/director.jpeg";
+import IntroVideo from "./assets/intro_video.mp4"
 import { 
   Menu, 
   X, 
@@ -28,7 +32,7 @@ import {
 
 const translations = {
   en: {
-    nav: { home: "Home", contact: "Contact", login: "Login" },
+    nav: { home: "Home", contact: "Contact", login: "Login", services: "Services" },
     hero: {
       title: <>Turning Today's <span className="text-green-400">Waste</span> <br/>Into Tomorrow's <span className="text-green-400">Wealth</span></>,
       sub: "Garhwal's most trusted digital scrap collection platform. Fair pricing, instant pickup, and responsible recycling at your doorstep.",
@@ -63,60 +67,6 @@ const translations = {
   }
 };
 
-// const Contact = () => (
-//   <div className="pt-32 pb-20 px-6 min-h-screen bg-slate-50 dark:bg-slate-950">
-//     <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
-//       <div className="space-y-8">
-//         <h2 className="text-4xl font-black text-slate-900 dark:text-white">Let's connect.</h2>
-//         <p className="text-lg text-slate-600 dark:text-slate-400">Ready to recycle? Or have questions about our bulk industrial scrap services? Drop us a message.</p>
-        
-//         <div className="space-y-6">
-//           <div className="flex items-center gap-4 group">
-//             <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center text-green-600">
-//               <Phone size={24} />
-//             </div>
-//             <div>
-//               <p className="text-sm font-bold text-slate-400 uppercase">Call Us</p>
-//               <p className="text-lg font-bold dark:text-white">+91 98765 43210</p>
-//             </div>
-//           </div>
-//           <div className="flex items-center gap-4 group">
-//             <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center text-green-600">
-//               <Mail size={24} />
-//             </div>
-//             <div>
-//               <p className="text-sm font-bold text-slate-400 uppercase">Email</p>
-//               <p className="text-lg font-bold dark:text-white">hello@garhwaltraiders.com</p>
-//             </div>
-//           </div>
-//           <div className="flex items-center gap-4 group">
-//             <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center text-green-600">
-//               <MapPin size={24} />
-//             </div>
-//             <div>
-//               <p className="text-sm font-bold text-slate-400 uppercase">Location</p>
-//               <p className="text-lg font-bold dark:text-white">Pauri Market, Uttarakhand</p>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-
-//       <div className="bg-white dark:bg-slate-900 p-8 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-800">
-//         <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-//           <div className="grid grid-cols-2 gap-4">
-//             <input className="w-full p-4 bg-slate-50 dark:bg-slate-800 rounded-xl border-none focus:ring-2 focus:ring-green-500 transition-all dark:text-white" placeholder="First Name" />
-//             <input className="w-full p-4 bg-slate-50 dark:bg-slate-800 rounded-xl border-none focus:ring-2 focus:ring-green-500 transition-all dark:text-white" placeholder="Last Name" />
-//           </div>
-//           <input className="w-full p-4 bg-slate-50 dark:bg-slate-800 rounded-xl border-none focus:ring-2 focus:ring-green-500 transition-all dark:text-white" placeholder="Email Address" type="email" />
-//           <textarea className="w-full p-4 bg-slate-50 dark:bg-slate-800 rounded-xl border-none focus:ring-2 focus:ring-green-500 transition-all dark:text-white h-32" placeholder="Your Message"></textarea>
-//           <button className="w-full py-4 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 transition-all flex items-center justify-center gap-2">
-//             Send Message <Send size={20} />
-//           </button>
-//         </form>
-//       </div>
-//     </div>
-//   </div>
-// );
 
 const BrandCollabs = ({ t }) => {
   const brands = [1, 2, 3, 4, 5, 6];
@@ -135,10 +85,10 @@ const BrandCollabs = ({ t }) => {
           {displayBrands.map((i, idx) => (
             <div 
               key={idx} 
-              className="flex-shrink-0 flex flex-col items-center justify-center min-w-[200px] px-10 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer group/item"
+              className="flex-shrink-0 flex flex-col items-center justify-center min-w-[300px] px-10 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer group/item"
             >
               <div className="aspect-square w-full bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center border border-slate-200 dark:border-slate-700 shadow-sm group-hover/item:shadow-md mb-4">
-                 <Recycle className="text-slate-300 dark:text-slate-600 w-1/2 h-1/2" />
+                 <Recycle className="text-slate-300 dark:text-slate-600 w-3/4 h-3/4" />
               </div>
               <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Brand {i}</span>
             </div>
@@ -167,17 +117,21 @@ const Home = ({ t, toggleLanguage }) => (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-slate-900">
-          <img 
-            src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1920&q=80" 
-            className="w-full h-full object-cover opacity-40" 
-            alt="Recycling Background"
-          />
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-40"
+          >
+            <source src={IntroVideo} type="video/mp4" />
+          </video>
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-slate-900"></div>
       </div>
       <div className="relative z-10 text-center px-6 max-w-4xl">
-        <h1 className="text-4xl md:text-7xl font-black text-white leading-tight mb-6">{t.hero.title}</h1>
-        <p className="text-lg md:text-xl text-slate-200 mb-10 max-w-2xl mx-auto font-light">{t.hero.sub}</p>
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-tight mb-6">{t.hero.title}</h1>
+        <p className="text-base sm:text-lg lg:text-xl text-slate-200 mb-10 max-w-2xl mx-auto font-light">{t.hero.sub}</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button onClick={toggleLanguage} className="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full font-bold hover:bg-white/20 transition-all">{t.hero.btnLang}</button>
           <Link to="/contact" className="px-8 py-4 bg-green-500 text-white rounded-full font-bold hover:bg-green-400 transition-all shadow-xl flex items-center justify-center gap-2 group">
@@ -194,7 +148,7 @@ const Home = ({ t, toggleLanguage }) => (
           <div className="absolute inset-0 border-2 border-green-600 rounded-3xl "></div>
           <div className="relative z-10 aspect-[4/5] overflow-hidden rounded-3xl shadow-2xl bg-slate-100 dark:bg-slate-800">
             <img 
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80" 
+                src={DirectorImage}
                 alt="Director" 
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" 
             />
@@ -245,6 +199,7 @@ const App = () => {
               <div className="hidden md:flex items-center gap-8 font-bold">
                 <Link to="/" className={`hover:text-green-600 transition-colors ${!scrolled ? 'text-white' : 'text-slate-700 dark:text-slate-300'}`}>{t.nav.home}</Link>
                 <Link to="/contact" className={`hover:text-green-600 transition-colors ${!scrolled ? 'text-white' : 'text-slate-700 dark:text-slate-300'}`}>{t.nav.contact}</Link>
+                <Link to="/services" className={`hover:text-green-600 transition-colors ${!scrolled ? 'text-white' : 'text-slate-700 dark:text-slate-300'}`}>{t.nav.services}</Link>
                 <Link to="/login" className="px-6 py-2.5 rounded-full bg-green-600 text-white hover:bg-green-700 shadow-lg shadow-green-600/20">{t.nav.login}</Link>
               </div>
 
@@ -259,6 +214,7 @@ const App = () => {
                 <Link to="/" onClick={() => setIsMenuOpen(false)}>{t.nav.home}</Link>
                 <Link to="/contact" onClick={() => setIsMenuOpen(false)}>{t.nav.contact}</Link>
                 <Link to="/login" onClick={() => setIsMenuOpen(false)}>{t.nav.login}</Link>
+                <Link to="/services" onClick={() => setIsMenuOpen(false)}>{t.nav.services}</Link>
               </div>
             </div>
           </nav>
@@ -267,19 +223,8 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Home t={t} toggleLanguage={toggleLanguage} />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/login" element={
-                <div className="pt-40 min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-900 px-6">
-                  <div className="bg-white dark:bg-slate-800 p-12 rounded-3xl shadow-2xl w-full max-w-md border dark:border-slate-700 text-center">
-                    <User size={64} className="mx-auto text-green-600 mb-6" />
-                    <h2 className="text-3xl font-bold dark:text-white mb-6">Partner Portal</h2>
-                    <div className="space-y-4">
-                      <input className="w-full p-4 bg-slate-50 dark:bg-slate-700 rounded-xl dark:text-white outline-none focus:ring-2 focus:ring-green-500" placeholder="Username" />
-                      <input className="w-full p-4 bg-slate-50 dark:bg-slate-700 rounded-xl dark:text-white outline-none focus:ring-2 focus:ring-green-500" type="password" placeholder="Password" />
-                      <button className="w-full py-4 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 transition-colors">Sign In</button>
-                    </div>
-                  </div>
-                </div>
-              } />
+              <Route path="/login" element={<Login />} />
+              <Route path='/services' element={<Services />} />
             </Routes>
           </main>
 
