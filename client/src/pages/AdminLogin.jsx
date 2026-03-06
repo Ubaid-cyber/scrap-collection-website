@@ -10,30 +10,38 @@ export default function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-     const res = await fetch("https://scrap-collection-website.onrender.com/api/login", {
+  cconst handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+
+    const res = await fetch(
+      "https://scrap-collection-website.onrender.com/api/login",
+      {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
-      });
-      
-      const data = await res.json();
-
-      // 🔴 FIX: Sirf check karein ki login successful hai aur token mil gaya hai.
-      if (res.ok && data.token) {
-        localStorage.setItem("adminToken", data.token); // Token save karein
-        window.location.href = "/admin-dashboard"; // Dashboard par redirect karein
-      } else {
-        // Agar password galat hoga, tabhi ye alert aayega
-        alert(data.message || "Invalid Admin Credentials!");
+        body: JSON.stringify({ email, password }),
       }
-    } catch(error) {
-      alert("Backend error! Make sure server is running on port 5000.");
-    }
-  };
+    );
 
+    const data = await res.json();
+
+    if (res.ok && data.token) {
+
+      // save admin token
+      localStorage.setItem("adminToken", data.token);
+
+      // redirect to dashboard
+      window.location.href = "/admin-dashboard";
+
+    } else {
+      alert(data.message || "Invalid admin credentials");
+    }
+
+  } catch (error) {
+    console.error("Admin login error:", error);
+  }
+};
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#0b1830] px-4">
       <div className="w-full max-w-[340px] bg-slate-900/90 backdrop-blur-md p-6 rounded-2xl border border-green-500/20 shadow-xl">
