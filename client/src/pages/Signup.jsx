@@ -9,27 +9,31 @@ export default function Signup() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
+  try {
     const res = await fetch("https://scrap-collection-website.onrender.com/api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email, password }),
-      });
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password }),
+    });
 
-      
+    const data = await res.json();
 
-const data = await res.json();
+    if (res.ok) {
+      alert(data.message || "Signup successful");
+      navigate("/login");
+    } else {
+      alert(data.message || data.error || "Signup failed");
+    }
 
-if (res.ok) {
-  alert(data.message || "Signup successful");
-  navigate("/login");
-} else {
-  alert(data.message || data.error || "Signup failed");
-}
+  } catch (error) {
+    console.error(error);
+    alert("Server error. Please try again.");
+  }
+};
 
   return (
     <div className="min-h-screen flex flex-col items-center pt-28 pb-12 bg-[#0b1830] px-4">
@@ -93,4 +97,3 @@ if (res.ok) {
     </div>
   );
 }
-console.log(import.meta.env.VITE_API_URL);
