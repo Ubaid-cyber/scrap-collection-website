@@ -16,12 +16,14 @@ export default function AdminDashboard() {
 
   const fetchRequests = async () => {
     try {
-     const res = await fetch("https://scrap-collection-website.onrender.com/api/all-requests", {
-        headers: {
-          
-          Authorization: `Bearer ${token}`,
+      const res = await fetch(
+        "https://scrap-collection-website.onrender.com/api/all-requests",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
 
       const data = await res.json();
 
@@ -44,30 +46,29 @@ export default function AdminDashboard() {
   }, []);
 
   const updateStatus = async (id, newStatus) => {
-
-  try {
-
-    await fetch(
-      `https://scrap-collection-website.onrender.com/api/update-status/${id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+    try {
+      await fetch(
+        `https://scrap-collection-website.onrender.com/api/update-status/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ status: newStatus }),
         },
-        body: JSON.stringify({ status: newStatus }),
-      }
-    );
+      );
 
-    fetchRequests();
-
-  } catch (err) {
-
-    console.error("Error updating:", err);
-
-  }
-
-};
+      // ⚡ instant UI update
+      setRequests((prev) =>
+        prev.map((req) =>
+          req._id === id ? { ...req, status: newStatus } : req,
+        ),
+      );
+    } catch (err) {
+      console.error("Error updating:", err);
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("adminToken");
@@ -197,7 +198,11 @@ export default function AdminDashboard() {
                       </td>
                       <td className="p-4">
                         <span className="px-2 py-1.5 rounded-md text-[10px] font-black uppercase bg-slate-800">
-                          {req.status}
+                          {req.status === "approved"
+                            ? "APPROVED"
+                            : req.status === "rejected"
+                              ? "REJECTED"
+                              : "PENDING"}
                         </span>
                       </td>
                       <td className="p-4 flex gap-2 justify-center">

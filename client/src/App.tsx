@@ -257,7 +257,6 @@ const AppContent: React.FC<AppContentProps> = ({
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
 
-  // 🔴 Function to force scroll to top if clicking on the current page link [cite: 2026-03-06, 2025-10-07]
   const handleNavClick = (path: string) => {
     if (location.pathname === path) {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -271,156 +270,165 @@ const AppContent: React.FC<AppContentProps> = ({
 
       <div className="min-h-screen font-sans text-slate-900 bg-white dark:bg-slate-950 transition-colors duration-500 flex flex-col">
         {!isAdminRoute && (
-          <nav
-            className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${scrolled ? "bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-slate-200 dark:border-slate-800 py-3 shadow-sm" : "bg-transparent border-transparent py-5"}`}
-          >
-            <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-              <Link
-                to="/"
-                onClick={() => handleNavClick("/")}
-                className="flex items-center gap-2 group"
-              >
-                <div className="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform shadow-md">
+          <div className="fixed top-0 w-full z-50 flex flex-col">
+            {/* Classic Yellow Beta Banner */}
+            <div className="bg-yellow-400 text-gray-900 text-center py-2 px-4 text-xs sm:text-sm font-medium w-full leading-snug shadow-sm">
+              <span className="mr-1">🚧</span> This website is currently in Beta version. Some features may still be under development.
+            </div>
 
-  <img
-    src={logo}
-    alt="Garhwal Traders"
-    className="w-9 h-9 object-contain filter brightness-0 invert"
-  />
-
-</div>
-                <span
-                  className={`text-xl font-bold tracking-tight uppercase ${!scrolled ? "text-white" : "dark:text-white"}`}
-                >
-                  GARHWAL <span className="text-green-600">TRADERS</span>
-                </span>
-              </Link>
-
-              <div className="hidden md:flex items-center gap-8 font-bold">
+            <nav
+              className={`relative w-full transition-all duration-300 border-b ${
+                scrolled
+                  ? "bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-slate-200 dark:border-slate-800 py-3 shadow-sm"
+                  : "bg-transparent border-transparent py-5"
+              }`}
+            >
+              <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
                 <Link
                   to="/"
                   onClick={() => handleNavClick("/")}
-                  className={`hover:text-green-600 transition-colors ${!scrolled ? "text-white" : "text-slate-700 dark:text-slate-300"}`}
+                  className="flex items-center gap-2 group"
                 >
-                  {t.nav.home}
-                </Link>
-                <Link
-                  to="/contact"
-                  onClick={() => handleNavClick("/contact")}
-                  className={`hover:text-green-600 transition-colors ${!scrolled ? "text-white" : "text-slate-700 dark:text-slate-300"}`}
-                >
-                  {t.nav.contact}
-                </Link>
-                <Link
-                  to="/services"
-                  onClick={() => handleNavClick("/services")}
-                  className={`hover:text-green-600 transition-colors ${!scrolled ? "text-white" : "text-slate-700 dark:text-slate-300"}`}
-                >
-                  {t.nav.services}
-                </Link>
-
-                {isLoggedIn ? (
-                  <>
-                    <Link
-                      to="/pickup"
-                      onClick={() => handleNavClick("/pickup")}
-                      className={`hover:text-green-600 transition-colors ${!scrolled ? "text-white" : "text-slate-700 dark:text-slate-300"}`}
-                    >
-                      Book Pickup
-                    </Link>
-                    <button
-                      onClick={handleLogout}
-                      className="px-6 py-2.5 rounded-full bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500 hover:text-white transition-all shadow-lg"
-                    >
-                      Logout
-                    </button>
-                  </>
-                ) : (
-                  <div className="flex items-center gap-6">
-                    <Link
-                      to="/signup"
-                      onClick={() => handleNavClick("/signup")}
-                      className={`font-bold hover:text-green-600 transition-colors ${!scrolled ? "text-white" : "text-slate-700 dark:text-slate-300"}`}
-                    >
-                      Sign Up
-                    </Link>
-                    <Link
-                      to="/login"
-                      onClick={() => handleNavClick("/login")}
-                      className="px-6 py-2.5 rounded-full bg-green-600 text-white hover:bg-green-700 shadow-lg shadow-green-600/20"
-                    >
-                      {t.nav.login}
-                    </Link>
+                  <div className="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform shadow-md">
+                    <img
+                      src={logo}
+                      alt="Garhwal Traders"
+                      className="w-9 h-9 object-contain filter brightness-0 invert"
+                    />
                   </div>
-                )}
-              </div>
-
-              <button
-                className="md:hidden"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-              >
-                {isMenuOpen ? (
-                  <X className="dark:text-white" />
-                ) : (
-                  <Menu
-                    className={!scrolled ? "text-white" : "dark:text-white"}
-                  />
-                )}
-              </button>
-            </div>
-
-            <div
-              className={`md:hidden absolute top-full left-0 w-full bg-white dark:bg-slate-900 border-b transition-all duration-300 ${isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}
-            >
-              <div className="p-6 flex flex-col gap-4 font-bold">
-                <Link to="/" onClick={() => handleNavClick("/")}>
-                  {t.nav.home}
+                  <span
+                    className={`text-xl font-bold tracking-tight uppercase ${!scrolled ? "text-white" : "dark:text-white"}`}
+                  >
+                    GARHWAL <span className="text-green-600">TRADERS</span>
+                  </span>
                 </Link>
-                <Link to="/contact" onClick={() => handleNavClick("/contact")}>
-                  {t.nav.contact}
-                </Link>
-                <Link
-                  to="/services"
-                  onClick={() => handleNavClick("/services")}
+
+                <div className="hidden md:flex items-center gap-8 font-bold">
+                  <Link
+                    to="/"
+                    onClick={() => handleNavClick("/")}
+                    className={`hover:text-green-600 transition-colors ${!scrolled ? "text-white" : "text-slate-700 dark:text-slate-300"}`}
+                  >
+                    {t.nav.home}
+                  </Link>
+                  <Link
+                    to="/contact"
+                    onClick={() => handleNavClick("/contact")}
+                    className={`hover:text-green-600 transition-colors ${!scrolled ? "text-white" : "text-slate-700 dark:text-slate-300"}`}
+                  >
+                    {t.nav.contact}
+                  </Link>
+                  <Link
+                    to="/services"
+                    onClick={() => handleNavClick("/services")}
+                    className={`hover:text-green-600 transition-colors ${!scrolled ? "text-white" : "text-slate-700 dark:text-slate-300"}`}
+                  >
+                    {t.nav.services}
+                  </Link>
+
+                  {isLoggedIn ? (
+                    <>
+                      <Link
+                        to="/pickup"
+                        onClick={() => handleNavClick("/pickup")}
+                        className={`hover:text-green-600 transition-colors ${!scrolled ? "text-white" : "text-slate-700 dark:text-slate-300"}`}
+                      >
+                        Book Pickup
+                      </Link>
+                      <button
+                        onClick={handleLogout}
+                        className="px-6 py-2.5 rounded-full bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500 hover:text-white transition-all shadow-lg"
+                      >
+                        Logout
+                      </button>
+                    </>
+                  ) : (
+                    <div className="flex items-center gap-6">
+                      <Link
+                        to="/signup"
+                        onClick={() => handleNavClick("/signup")}
+                        className={`font-bold hover:text-green-600 transition-colors ${!scrolled ? "text-white" : "text-slate-700 dark:text-slate-300"}`}
+                      >
+                        Sign Up
+                      </Link>
+                      <Link
+                        to="/login"
+                        onClick={() => handleNavClick("/login")}
+                        className="px-6 py-2.5 rounded-full bg-green-600 text-white hover:bg-green-700 shadow-lg shadow-green-600/20"
+                      >
+                        {t.nav.login}
+                      </Link>
+                    </div>
+                  )}
+                </div>
+
+                <button
+                  className="md:hidden"
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
-                  {t.nav.services}
-                </Link>
-                {isLoggedIn ? (
-                  <>
-                    <Link
-                      to="/pickup"
-                      onClick={() => handleNavClick("/pickup")}
-                      className="text-green-600"
-                    >
-                      Book Pickup
-                    </Link>
-                    <button
-                      onClick={handleLogout}
-                      className="text-left text-red-500 font-bold"
-                    >
-                      Logout
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <Link
-                      to="/signup"
-                      onClick={() => handleNavClick("/signup")}
-                    >
-                      Sign Up
-                    </Link>
-                    <Link
-                      to="/login"
-                      onClick={() => handleNavClick("/login")}
-                      className="text-green-600"
-                    >
-                      {t.nav.login}
-                    </Link>
-                  </>
-                )}
+                  {isMenuOpen ? (
+                    <X className="dark:text-white" />
+                  ) : (
+                    <Menu
+                      className={!scrolled ? "text-white" : "dark:text-white"}
+                    />
+                  )}
+                </button>
               </div>
-            </div>
-          </nav>
+
+              <div
+                className={`md:hidden absolute top-full left-0 w-full bg-white dark:bg-slate-900 border-b transition-all duration-300 ${isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}
+              >
+                <div className="p-6 flex flex-col gap-4 font-bold">
+                  <Link to="/" onClick={() => handleNavClick("/")}>
+                    {t.nav.home}
+                  </Link>
+                  <Link to="/contact" onClick={() => handleNavClick("/contact")}>
+                    {t.nav.contact}
+                  </Link>
+                  <Link
+                    to="/services"
+                    onClick={() => handleNavClick("/services")}
+                  >
+                    {t.nav.services}
+                  </Link>
+                  {isLoggedIn ? (
+                    <>
+                      <Link
+                        to="/pickup"
+                        onClick={() => handleNavClick("/pickup")}
+                        className="text-green-600"
+                      >
+                        Book Pickup
+                      </Link>
+                      <button
+                        onClick={handleLogout}
+                        className="text-left text-red-500 font-bold"
+                      >
+                        Logout
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        to="/signup"
+                        onClick={() => handleNavClick("/signup")}
+                      >
+                        Sign Up
+                      </Link>
+                      <Link
+                        to="/login"
+                        onClick={() => handleNavClick("/login")}
+                        className="text-green-600"
+                      >
+                        {t.nav.login}
+                      </Link>
+                    </>
+                  )}
+                </div>
+              </div>
+            </nav>
+          </div>
         )}
 
         <main className="flex-grow">
@@ -534,23 +542,23 @@ const AppContent: React.FC<AppContentProps> = ({
 // --- APP ENTRY POINT ---
 const App: React.FC = () => {
   const [language, setLanguage] = useState<"en" | "hi">("en");
-  // add dark 
+  // add dark
   const [darkMode, setDarkMode] = useState<boolean>(() => {
-  return localStorage.getItem("theme") === "dark";
-});
+    return localStorage.getItem("theme") === "dark";
+  });
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
 
-  // add 
+  // add
   useEffect(() => {
-  if (darkMode) {
-    document.documentElement.classList.add("dark");
-    localStorage.setItem("theme", "dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-    localStorage.setItem("theme", "light");
-  }
-}, [darkMode]);
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
 
   const isLoggedIn = !!localStorage.getItem("token");
   const t = translations[language];
@@ -562,7 +570,7 @@ const App: React.FC = () => {
   }, []);
 
   const toggleLanguage = () => setLanguage((l) => (l === "en" ? "hi" : "en"));
- const toggleDarkMode = () => setDarkMode(prev => !prev);
+  const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
