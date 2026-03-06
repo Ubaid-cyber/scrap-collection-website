@@ -20,17 +20,16 @@ export default function Signup() {
         body: JSON.stringify({ name, email, password }),
       });
 
-      const data = await res.json();
-      alert(data.message);
+      
 
-      if (res.ok) {
-        navigate("/login");
-      }
-    } catch (error) {
-      console.log(error);
-      alert("Something went wrong. Please try again.");
-    }
-  };
+const data = await res.json();
+
+if (res.ok) {
+  alert(data.message || "Signup successful");
+  navigate("/login");
+} else {
+  alert(data.message || data.error || "Signup failed");
+}
 
   return (
     <div className="min-h-screen flex flex-col items-center pt-28 pb-12 bg-[#0b1830] px-4">
