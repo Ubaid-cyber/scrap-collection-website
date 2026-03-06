@@ -9,35 +9,36 @@ const [pickupDate, setPickupDate] = useState("");
 const [success, setSuccess] = useState(false);
 
 const handleSubmit = async (e) => {
-e.preventDefault();
+  e.preventDefault();
 
+  try {
 
-try {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/pickup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("token")
+      },
+      body: JSON.stringify({
+        scrapType,
+        weight,
+        address,
+        pickupDate
+      })
+    });
 
-  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/pickup`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + localStorage.getItem("token")
-    },
-    body: JSON.stringify({
-      scrapType,
-      weight,
-      address,
-      pickupDate
-    })
-  });
+    const data = await res.json();
 
-  await res.json();
+    if (res.ok) {
+      setSuccess(true);
+    } else {
+      alert(data.message || data.error || "Pickup request failed");
+    }
 
-  // success state
-  setSuccess(true);
-
-} catch (error) {
-  console.log(error);
-}
-
-
+  } catch (error) {
+    console.log(error);
+    alert("Server error");
+  }
 };
 
 return (
