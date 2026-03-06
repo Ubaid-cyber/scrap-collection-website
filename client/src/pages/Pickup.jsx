@@ -13,7 +13,7 @@ const handleSubmit = async (e) => {
 
   try {
 
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/pickup`, {
+    const res = await fetch("https://scrap-collection-website.onrender.com/api/pickup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
