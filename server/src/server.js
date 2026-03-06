@@ -526,7 +526,8 @@ app.get("/api/profile", auth, async (req, res) => {
 app.post("/api/pickup", auth, async (req, res) => {
 
   try {
-
+console.log("UserID:", req.userId);
+    console.log("Body:", req.body);
     const { scrapType, weight, address, pickupDate } = req.body;
 
     const pickup = new Pickup({
@@ -545,11 +546,9 @@ app.post("/api/pickup", auth, async (req, res) => {
     });
 
   } catch (err) {
-
+    console.error("Pickup error:", err);
     res.status(500).json({ error: err.message });
-
   }
-
 });
 
 
