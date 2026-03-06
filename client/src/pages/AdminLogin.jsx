@@ -10,7 +10,7 @@ export default function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  cconst handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
   e.preventDefault();
 
   try {
