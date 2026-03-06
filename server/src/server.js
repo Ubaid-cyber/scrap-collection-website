@@ -429,10 +429,15 @@ app.get("/api/seed", async (req, res) => {
 // ---------- SIGNUP ----------
 
 app.post("/api/signup", async (req, res) => {
-
   try {
 
     const { name, email, password } = req.body;
+
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      return res.status(400).json({ message: "Email already registered" });
+    }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -447,13 +452,9 @@ app.post("/api/signup", async (req, res) => {
     res.json({ message: "User registered successfully" });
 
   } catch (err) {
-
     res.status(500).json({ error: err.message });
-
   }
-
 });
-
 
 // ---------- LOGIN ----------
 

@@ -6,34 +6,32 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email, password })
-      });
+  try {
+    const res = await fetch("https://scrap-collection-website.onrender.com/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, password })
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (data.token) {
-        // Token browser mein save karein
-        localStorage.setItem("token", data.token);
-
-        // window.location.href use kiya hai taaki App.jsx re-render ho aur Navbar update ho jaye
-        window.location.href = "/pickup";
-      } else {
-        alert(data.message || "Login failed");
-      }
-    } catch(error) {
-      console.log(error);
-      alert("Something went wrong");
+    if (res.ok && data.token) {
+      localStorage.setItem("token", data.token);
+      window.location.href = "/pickup";
+    } else {
+      alert(data.message || data.error || "Login failed");
     }
-  };
+
+  } catch (error) {
+    console.error(error);
+    alert("Something went wrong");
+  }
+};
 
   return (
     // Design aur spacing ko Signup/Pickup jaisa exact same kar diya hai
