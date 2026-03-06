@@ -44,21 +44,30 @@ export default function AdminDashboard() {
   }, []);
 
   const updateStatus = async (id, newStatus) => {
-    try {
-      await fetch(`${import.meta.env.VITE_API_URL}/api/update-status/${id}`, {
+
+  try {
+
+    await fetch(
+      `https://scrap-collection-website.onrender.com/api/update-status/${id}`,
+      {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-        
-          Authorization: `Bearer ${token}`, // 🔴 YAHAN BHI FIX KIYA
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ status: newStatus }),
-      });
-      fetchRequests();
-    } catch (err) {
-      console.error("Error updating:", err);
-    }
-  };
+      }
+    );
+
+    fetchRequests();
+
+  } catch (err) {
+
+    console.error("Error updating:", err);
+
+  }
+
+};
 
   const handleLogout = () => {
     localStorage.removeItem("adminToken");
