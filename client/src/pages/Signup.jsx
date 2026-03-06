@@ -1,55 +1,63 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom"; 
+import { Link, useNavigate } from "react-router-dom"; 
 
-export default function Login() {
-  const navigate = useNavigate();
+export default function Signup() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5000/api/login", {
+      const res = await fetch("http://localhost:5000/api/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ name, email, password })
       });
 
       const data = await res.json();
+      alert(data.message);
 
-      if (data.token) {
-        // Token browser mein save karein
-        localStorage.setItem("token", data.token);
-
-        // window.location.href use kiya hai taaki App.jsx re-render ho aur Navbar update ho jaye
-        window.location.href = "/pickup";
-      } else {
-        alert(data.message || "Login failed");
+      if (res.ok) {
+        navigate("/login");
       }
+
     } catch(error) {
       console.log(error);
-      alert("Something went wrong");
+      alert("Something went wrong. Please try again.");
     }
   };
 
   return (
-    // Design aur spacing ko Signup/Pickup jaisa exact same kar diya hai
-    <div className="min-h-screen flex flex-col items-center justify-center bg-[#0b1830] px-4 pt-20 pb-12">
+    <div className="min-h-screen flex flex-col items-center pt-28 pb-12 bg-[#0b1830] px-4">
 
-      {/* max-w-[340px] aur p-6 kiya hai taaki uniform lage */}
+      {/* Exactly matched Pickup card styling: w-[340px], p-6, rounded-2xl */}
       <div className="w-full max-w-[340px] bg-slate-800/80 backdrop-blur-md p-6 rounded-2xl shadow-2xl border border-slate-700">
 
+        {/* Text sizes aur margins Pickup ki tarah set kiye (mb-1 aur mb-6) */}
         <h2 className="text-center text-2xl font-bold text-white mb-1">
-          Partner Portal
+          Create Account
         </h2>
         <p className="text-center text-slate-400 text-xs mb-6">
-          Sign in to your account
+          Join Garhwal Traders today
         </p>
 
+        {/* Form gap ko gap-4 se gap-3 kiya */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+
+          <input
+            type="text"
+            placeholder="Full Name"
+            className="w-full p-3 text-sm rounded-xl bg-slate-700 text-white outline-none focus:ring-2 focus:ring-green-500 transition-all"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
 
           <input
             type="email"
@@ -69,17 +77,19 @@ export default function Login() {
             required
           />
 
-          <button className="w-full mt-2 bg-green-600 hover:bg-green-700 text-white py-3 text-sm rounded-xl font-bold tracking-wide shadow-lg hover:shadow-green-500/30 transition-all active:scale-[0.98]">
-            Sign In
+          <button
+            type="submit"
+            className="w-full mt-2 bg-green-600 hover:bg-green-700 text-white py-3 text-sm rounded-xl font-bold tracking-wide transition-all shadow-lg hover:shadow-green-500/30 active:scale-[0.98]"
+          >
+            Sign Up
           </button>
 
         </form>
 
-        {/* Signup par wapas jane ka link add kar diya hai */}
         <p className="mt-5 text-center text-xs text-slate-400">
-          Don't have an account?{" "}
-          <Link to="/signup" className="text-green-500 hover:text-green-400 font-semibold transition-colors">
-            Sign up here
+          Already have an account?{" "}
+          <Link to="/login" className="text-green-500 hover:text-green-400 font-semibold transition-colors">
+            Login here
           </Link>
         </p>
 
