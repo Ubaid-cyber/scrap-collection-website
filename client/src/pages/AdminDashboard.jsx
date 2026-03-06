@@ -18,8 +18,7 @@ export default function AdminDashboard() {
     try {
      const res = await fetch("https://scrap-collection-website.onrender.com/api/all-requests", {
         headers: {
-          // 🔴
-          "x-auth-token": token,
+          
           Authorization: `Bearer ${token}`,
         },
       });
