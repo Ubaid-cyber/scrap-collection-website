@@ -16,7 +16,7 @@ export default function AdminDashboard() {
 
   const fetchRequests = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/all-requests", {
+     const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
         headers: {
           // 🔴
           "x-auth-token": token,
@@ -46,7 +46,7 @@ export default function AdminDashboard() {
 
   const updateStatus = async (id, newStatus) => {
     try {
-      await fetch(`http://localhost:5000/api/update-status/${id}`, {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/update-status/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

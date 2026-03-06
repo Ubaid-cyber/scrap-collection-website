@@ -1,23 +1,23 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; 
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
-  const navigate = useNavigate(); 
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5000/api/signup", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/signup`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, password })
+        body: JSON.stringify({ name, email, password }),
       });
 
       const data = await res.json();
@@ -26,8 +26,7 @@ export default function Signup() {
       if (res.ok) {
         navigate("/login");
       }
-
-    } catch(error) {
+    } catch (error) {
       console.log(error);
       alert("Something went wrong. Please try again.");
     }
@@ -35,10 +34,8 @@ export default function Signup() {
 
   return (
     <div className="min-h-screen flex flex-col items-center pt-28 pb-12 bg-[#0b1830] px-4">
-
       {/* Exactly matched Pickup card styling: w-[340px], p-6, rounded-2xl */}
       <div className="w-full max-w-[340px] bg-slate-800/80 backdrop-blur-md p-6 rounded-2xl shadow-2xl border border-slate-700">
-
         {/* Text sizes aur margins Pickup ki tarah set kiye (mb-1 aur mb-6) */}
         <h2 className="text-center text-2xl font-bold text-white mb-1">
           Create Account
@@ -49,7 +46,6 @@ export default function Signup() {
 
         {/* Form gap ko gap-4 se gap-3 kiya */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-
           <input
             type="text"
             placeholder="Full Name"
@@ -83,16 +79,17 @@ export default function Signup() {
           >
             Sign Up
           </button>
-
         </form>
 
         <p className="mt-5 text-center text-xs text-slate-400">
           Already have an account?{" "}
-          <Link to="/login" className="text-green-500 hover:text-green-400 font-semibold transition-colors">
+          <Link
+            to="/login"
+            className="text-green-500 hover:text-green-400 font-semibold transition-colors"
+          >
             Login here
           </Link>
         </p>
-
       </div>
     </div>
   );
