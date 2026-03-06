@@ -436,7 +436,7 @@ const AppContent: React.FC<AppContentProps> = ({
             <Route path="/pickup" element={<Pickup />} />
             <Route path="/admin-login" element={<AdminLogin />} />
             <Route
-              path="/admin-portal"
+              path="/admin-dashboard"
               element={
                 <AdminRoute>
                   <AdminDashboard />

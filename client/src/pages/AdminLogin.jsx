@@ -24,7 +24,7 @@ export default function AdminLogin() {
       // 🔴 FIX: Sirf check karein ki login successful hai aur token mil gaya hai.
       if (res.ok && data.token) {
         localStorage.setItem("adminToken", data.token); // Token save karein
-        window.location.href = "/admin-portal"; // Dashboard par redirect karein
+        window.location.href = "/admin-dashboard"; // Dashboard par redirect karein
       } else {
         // Agar password galat hoga, tabhi ye alert aayega
         alert(data.message || "Invalid Admin Credentials!");
