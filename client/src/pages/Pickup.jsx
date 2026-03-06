@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 export default function Pickup() {
 
@@ -43,6 +44,11 @@ const handleSubmit = async (e) => {
 
 return (
 
+<>
+<Helmet>
+<title>Scrap Pickup Request | Garhwal Traders</title>
+<meta name="description" content="Schedule scrap pickup for iron, plastic, paper and metal scrap in your area." />
+</Helmet>
 
 <div className="min-h-screen flex items-center justify-center pt-28 pb-20 bg-[#0b1830] px-4">
 
@@ -134,7 +140,7 @@ return (
   )}
 
 </div>
-
+</>
 
 );
 }
