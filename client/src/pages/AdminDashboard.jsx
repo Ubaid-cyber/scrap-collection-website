@@ -16,7 +16,7 @@ export default function AdminDashboard() {
 
   const fetchRequests = async () => {
     try {
-     const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
+     const res = await fetch("https://scrap-collection-website.onrender.com/api/all-requests", {
         headers: {
           // 🔴
           "x-auth-token": token,
@@ -50,7 +50,7 @@ export default function AdminDashboard() {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "x-auth-token": token,
+        
           Authorization: `Bearer ${token}`, // 🔴 YAHAN BHI FIX KIYA
         },
         body: JSON.stringify({ status: newStatus }),
