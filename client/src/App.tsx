@@ -509,7 +509,7 @@ const AppContent: React.FC<AppContentProps> = ({
               </div>
             </div>
             <div className="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500 gap-4">
-              <p>© 2026 gARHWAL Traders. All Rights Reserved.</p>
+              <p>© 2026 gARHWAL Trader. All Rights Reserved.</p>
               <div className="flex gap-6">
                 <span className="hover:text-white cursor-pointer">
                   Privacy Policy
